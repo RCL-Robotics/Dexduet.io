@@ -1,0 +1,98 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:06.425
+DexDuet: learning contact-preserving bimanual dexterity from human demonstrations.
+
+00:00:07.575 --> 00:00:13.343
+From a single human demonstration, DexDuet teaches two robot hands a bimanual skill.
+
+00:00:13.413 --> 00:00:16.344
+And the hands hold the object where the human does.
+
+00:00:17.494 --> 00:00:23.914
+Existing methods mainly reward the robot for moving the object along its demonstrated trajectory.
+
+00:00:23.984 --> 00:00:26.191
+But tracking the object is not enough.
+
+00:00:26.261 --> 00:00:32.363
+Even when the object follows its path, the hands may touch the wrong parts, or slide on the object.
+
+00:00:33.513 --> 00:00:37.218
+DexDuet instead preserves how the hands hold the object.
+
+00:00:37.288 --> 00:00:43.823
+Here, a human opens a ketchup bottle and hands it over, and the robot hands hold the same parts of the bottle.
+
+00:00:43.893 --> 00:00:45.902
+DexDuet has three components.
+
+00:00:47.052 --> 00:00:49.618
+First, a factorized per-hand policy.
+
+00:00:49.688 --> 00:00:55.236
+Two per-hand policies share one network, so each hand learns from the experience of both.
+
+00:00:55.306 --> 00:01:01.226
+Each policy observes its own hand and its partner's state, so each hand can adapt to its partner.
+
+00:01:01.296 --> 00:01:07.643
+And PPO's ratio is clipped per hand, so a large change in one hand no longer blocks the other.
+
+00:01:08.793 --> 00:01:11.026
+Second, two interaction rewards.
+
+00:01:11.096 --> 00:01:16.312
+Both compare each robot hand with the human hand itself, relative to the object.
+
+00:01:16.382 --> 00:01:22.264
+The hand graph reward matches the palm and finger directions, and the gaps between the fingertips.
+
+00:01:22.334 --> 00:01:28.608
+The hand-object contact reward makes each region of the hand touch the object where the human's does.
+
+00:01:29.758 --> 00:01:34.958
+Third, a curriculum called A-RSI: assisted reference-state initialization.
+
+00:01:35.028 --> 00:01:44.375
+Training assists the object with a virtual object controller from prior work: a PD controller that pulls the object toward its demonstrated state.
+
+00:01:44.445 --> 00:01:50.707
+A-RSI splits the demonstration into segments, and each segment has its own level of assistance.
+
+00:01:50.777 --> 00:01:55.540
+Assistance is withdrawn where the policy succeeds, and restored where it fails.
+
+00:01:55.610 --> 00:01:59.703
+Episodes start more often in and just before the failing segments.
+
+00:01:59.773 --> 00:02:05.759
+A decreasing ceiling brings every level to zero, so the final policy runs without assistance.
+
+00:02:06.909 --> 00:02:12.357
+We evaluate on four benchmarks, in three simulators, with five robot embodiments.
+
+00:02:12.427 --> 00:02:20.810
+DexDuet improves object tracking by 11 to 41 points of ADD-AUC over the baseline of each benchmark.
+
+00:02:20.880 --> 00:02:30.727
+To measure contacts, we introduce Contact-AUC: while the human hand holds a part, it scores how little the robot hand's contact points drift on that part.
+
+00:02:30.797 --> 00:02:35.220
+DexDuet reaches a higher Contact-AUC on every benchmark.
+
+00:02:36.370 --> 00:02:40.251
+Is that only because DexDuet tracks the object better? No.
+
+00:02:40.321 --> 00:02:51.800
+Among 122 pairs of runs that track the object equally well, DexDuet preserves the human's contacts better in 117, versus 5 for the baseline.
+
+00:02:52.950 --> 00:02:58.641
+Finally, DexDuet's simulated rollouts are replayed open-loop on real robots.
+
+00:02:58.711 --> 00:03:04.708
+A Unitree G1 humanoid with Inspire hands, and two Franka arms with Allegro hands.
+
+00:03:05.858 --> 00:03:11.434
+DexDuet: contact-preserving bimanual dexterity from human demonstrations.
+
