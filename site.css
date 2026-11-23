@@ -418,11 +418,11 @@ footer { border-top: 1px solid var(--line); }
 .award a.repo:hover { border-color: var(--ink); }
 
 /* real-robot clips: two tall humanoid clips and a column of two arm clips */
-.realgrid { display: grid; grid-template-columns: 9fr 9fr 10.4fr; gap: 14px; align-items: stretch; }
+.realgrid { display: grid; grid-template-columns: 9fr 9fr 7.3fr; gap: 14px; align-items: stretch; }
 .realgrid figure { margin: 0; position: relative; border-radius: 18px; overflow: hidden; background: #111; }
 .realgrid video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .realgrid > figure { aspect-ratio: 9 / 16; }
-.realgrid .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 14px; min-height: 0; }
+.realgrid .stack { display: grid; grid-template-rows: repeat(3, 1fr); gap: 14px; min-height: 0; }
 .realgrid .stack figure { min-height: 0; }
 .realgrid figcaption { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: end; gap: 10px; padding: 34px 14px 12px; font-size: 13.5px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.62)); text-align: left; }
 .realgrid figcaption b { font-weight: 600; }
@@ -843,7 +843,7 @@ nav a.link[aria-current] { color: var(--ink); background: var(--wash); }
 /* real robots between a phone and a desktop: the two humanoid clips in one row, the two arm clips in the next */
 @media (max-width: 960px) {
   .realgrid { grid-template-columns: 1fr 1fr; }
-  .realgrid .stack { grid-column: 1 / -1; grid-template-rows: none; grid-template-columns: 1fr 1fr; }
+  .realgrid .stack { grid-column: 1 / -1; grid-template-rows: none; grid-template-columns: repeat(3, 1fr); }
   .realgrid .stack figure { aspect-ratio: 4 / 3; }
 }
 @media (max-width: 600px) { .realgrid .stack { grid-template-columns: 1fr; } }
@@ -1100,3 +1100,44 @@ nav a.link[aria-current] { color: var(--ink); background: var(--wash); }
 /* corresponding-author note under the author line */
 .authors .corr { display: inline-block; margin-top: 4px; font-size: 13.5px; font-weight: 500; color: var(--muted); }
 .authors .corr sup { font-size: 1em; vertical-align: baseline; margin: 0 2px 0 0; }
+
+/* Contact-AUC above the results: what it is, two pairs of simulator frames, one line on the scoring */
+.metric { max-width: 960px; margin: 0 auto 30px; padding: 26px 28px 22px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: var(--shadow); }
+.metric .head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.metric h3 { margin: 0; font-size: 21px; font-weight: 680; letter-spacing: -.015em; color: var(--ink); }
+.metric .tag { padding: 3px 10px; border-radius: 999px; background: var(--violet-soft); color: var(--violet); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.metric .def { margin: 0; max-width: 720px; font-size: 16px; line-height: 1.6; color: var(--text); }
+.metric .sim { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 20px 0 16px; }
+.metric figure { margin: 0; }
+.metric figcaption { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.metric figcaption b { font-size: 15px; font-weight: 650; color: var(--ink); }
+.metric figcaption span { white-space: nowrap; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.metric figcaption em { margin-left: auto; font-style: normal; font-size: 13px; font-weight: 600; }
+.metric .base figcaption em { color: var(--coral); } .metric .duet figcaption em { color: var(--teal); }
+.metric .pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.metric .shot { position: relative; overflow: hidden; aspect-ratio: 1; background: #1b2a3a; }
+.metric .shot:first-child { border-radius: 12px 4px 4px 12px; } .metric .shot:last-child { border-radius: 4px 12px 12px 4px; }
+.metric .shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.metric .then { position: absolute; z-index: 1; left: 50%; top: 50%; width: 26px; height: 26px; transform: translate(-50%, -50%); border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(21, 22, 35, .25); }
+.metric .then::before { content: ""; position: absolute; left: 7px; top: 12px; width: 11px; height: 2px; border-radius: 1px; background: var(--ink); }
+.metric .then::after { content: ""; position: absolute; left: 12px; top: 9px; width: 6px; height: 6px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); transform: rotate(45deg); }
+.metric .ring { position: absolute; left: 73%; top: 77%; width: 40%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 1.5px solid rgba(255, 255, 255, .9); border-radius: 50%; box-shadow: 0 0 0 4px rgba(229, 72, 77, .35); }
+.metric .fine { margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.metric .fine .g { display: inline-block; width: 9px; height: 9px; margin-right: 7px; border-radius: 50%; background: #2fbf4f; }
+@media (max-width: 720px) {
+  .metric { padding: 18px 16px 16px; border-radius: 14px; } .metric h3 { font-size: 19px; } .metric .def { font-size: 15px; }
+  .metric .sim { grid-template-columns: 1fr; gap: 18px; margin: 16px 0 14px; }
+  .metric figcaption { gap: 8px; } .metric figcaption span, .metric figcaption em { white-space: nowrap; font-size: 12.5px; }
+}
+
+/* Real robots, two rows: the three arm tasks as large sim / real sliders, then the two humanoid clips */
+#real .rr { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; margin: 34px 0 14px; font-size: 17px; font-weight: 400; text-align: left; }
+#real .rr:first-of-type { margin-top: 8px; }
+#real .rr b { font-weight: 650; color: var(--ink); } #real .rr span { font-size: 14.5px; color: var(--muted); }
+.realgrid.arms { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.realgrid.arms > figure { aspect-ratio: 4 / 3; }
+.realgrid.g1 { grid-template-columns: repeat(2, minmax(0, 300px)); justify-content: center; gap: 16px; }
+.realgrid.g1 > figure { aspect-ratio: 9 / 16; }
+@media (max-width: 640px) { .realgrid.arms { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { #real .rr { margin-top: 26px; font-size: 16px; } .realgrid.g1 { grid-template-columns: 1fr 1fr; gap: 12px; } }
+@media (max-width: 960px) { .realgrid.arms figcaption { font-size: 12.5px; flex-direction: column; align-items: start; gap: 2px; } }

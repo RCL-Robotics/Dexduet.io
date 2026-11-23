@@ -11,7 +11,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-400.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/roll/hero/mosaic.jpg?v=9" fetchpriority="high">
-<link rel="stylesheet" href="site.css?v=98">
+<link rel="stylesheet" href="site.css?v=106">
 </head>
 <body>
 
@@ -114,7 +114,21 @@
 <section id="results">
   <div class="wrap">
     <h2>DexDuet tracks the object better on every benchmark, and preserves contacts better even at equal tracking</h2>
-    <p class="note center wide above"><b>Contact-AUC</b> scores how far the robot hand's contact points drift on a part while the human hand holds it, the way ADD-AUC scores the object's error.</p>
+    <div class="metric" id="contact-auc">
+      <div class="head"><h3>Contact-AUC</h3><span class="tag">Our new metric</span></div>
+      <p class="def">While a human hand holds a part of the object, Contact-AUC measures how far the robot hand's contact points drift on that part. The less they drift, the higher the score.</p>
+      <div class="sim">
+        <figure class="base">
+          <figcaption><b>DexMachina</b><span>ADD-AUC 94.3</span><em>&#x2715; leaves the part</em></figcaption>
+          <div class="pair"><div class="shot"><img src="assets/fig/cauc_sim_base_a.jpg" width="720" height="720" loading="lazy" alt="Simulator frame: the DexMachina robot hand is at the base of the mixer, next to the green points of the human hand."></div><i class="then" aria-hidden="true"></i><div class="shot"><img src="assets/fig/cauc_sim_base_b.jpg" width="720" height="720" loading="lazy" alt="Simulator frame a moment later: the object is still in place, but the robot hand has moved away from the base and from the green points."><i class="ring"></i></div></div>
+        </figure>
+        <figure class="duet">
+          <figcaption><b>DexDuet</b><span>ADD-AUC 94.9</span><em>&#x2713; keeps its hold</em></figcaption>
+          <div class="pair"><div class="shot"><img src="assets/fig/cauc_sim_duet_a.jpg" width="720" height="720" loading="lazy" alt="Simulator frame: the DexDuet robot hand holds the base of the mixer where the green points of the human hand are."></div><i class="then" aria-hidden="true"></i><div class="shot"><img src="assets/fig/cauc_sim_duet_b.jpg" width="720" height="720" loading="lazy" alt="Simulator frame a moment later: the DexDuet robot hand still holds the base at the green points."></div></div>
+        </figure>
+      </div>
+      <p class="fine"><span class="g"></span>Green: the human demonstration. Simulator frames of Mixer-170, a moment apart. Both runs track the object equally well, but only DexDuet stays on the part the human holds. Scored like ADD-AUC, over drift thresholds of 0.5 to 5&nbsp;cm; a hold without contact scores 0.</p>
+    </div>
     <div class="chooser" data-label="Result" data-as="tabs">
       <div class="opt" data-name="Benchmarks">
     <div class="card pad" id="chart">
@@ -321,14 +335,17 @@
 <section id="real">
   <div class="wrap">
     <h2>The learned motions run on real robots</h2>
-    <p class="lead">DexDuet's simulated rollouts are replayed open-loop on a Unitree G1 humanoid with Inspire hands and on two Franka arms with Allegro hands. On the arm tasks, drag the divider to compare the simulated rollout with the real robot.</p>
-    <div class="realgrid">
-      <figure><video muted loop playsinline preload="none" tabindex="-1" data-poster="assets/roll/real/g1_box.jpg" src="assets/roll/real/g1_box.mp4"></video><figcaption><b>Box placement · Unitree G1</b><span>1.5× speed</span></figcaption></figure>
-      <figure><video muted loop playsinline preload="none" tabindex="-1" data-poster="assets/roll/real/g1_bag.jpg" src="assets/roll/real/g1_bag.mp4"></video><figcaption><b>Bag placement · Unitree G1</b><span>1.5× speed</span></figcaption></figure>
-      <div class="stack">
-        <figure class="simreal" data-src="assets/roll/real/arms_bottle_simreal.mp4?v=4" style="background-image:url(assets/roll/real/arms_bottle_simreal.jpg?v=4)"><canvas width="800" height="600" aria-label="Bottle reorientation: simulation on the left, real robot on the right"></canvas><span class="chip sim">Simulation</span><span class="chip">Real robot</span><i class="bar" role="slider" tabindex="0" aria-label="Simulation / real robot split" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></i><figcaption><b>Bottle reorientation</b><span>Franka + Allegro · 3× speed</span></figcaption></figure>
-        <figure class="simreal" data-src="assets/roll/real/arms_gamepad_simreal.mp4?v=4" style="background-image:url(assets/roll/real/arms_gamepad_simreal.jpg?v=4)"><canvas width="800" height="600" aria-label="Gamepad placement: simulation on the left, real robot on the right"></canvas><span class="chip sim">Simulation</span><span class="chip">Real robot</span><i class="bar" role="slider" tabindex="0" aria-label="Simulation / real robot split" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></i><figcaption><b>Gamepad placement</b><span>Franka + Allegro · 3× speed</span></figcaption></figure>
-      </div>
+    <p class="lead">DexDuet's simulated rollouts are replayed open-loop on two real robot systems.</p>
+    <h3 class="rr"><b>Two Franka arms with Allegro hands</b><span>Drag the divider to compare the simulated rollout with the real robot.</span></h3>
+    <div class="realgrid arms">
+      <figure class="simreal" data-src="assets/roll/real/arms_bottle_simreal.mp4?v=4" style="background-image:url(assets/roll/real/arms_bottle_simreal.jpg?v=4)"><canvas width="800" height="600" aria-label="Bottle reorientation: simulation on the left, real robot on the right"></canvas><span class="chip sim">Simulation</span><span class="chip">Real robot</span><i class="bar" role="slider" tabindex="0" aria-label="Simulation / real robot split" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></i><figcaption><b>Bottle reorientation</b><span>3× speed</span></figcaption></figure>
+      <figure class="simreal" data-src="assets/roll/real/arms_gamepad_simreal.mp4?v=4" style="background-image:url(assets/roll/real/arms_gamepad_simreal.jpg?v=4)"><canvas width="800" height="600" aria-label="Gamepad placement: simulation on the left, real robot on the right"></canvas><span class="chip sim">Simulation</span><span class="chip">Real robot</span><i class="bar" role="slider" tabindex="0" aria-label="Simulation / real robot split" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></i><figcaption><b>Gamepad placement</b><span>3× speed</span></figcaption></figure>
+      <figure class="simreal" data-src="assets/roll/real/arms_pour_simreal.mp4?v=3" style="background-image:url(assets/roll/real/arms_pour_simreal.jpg?v=3)"><canvas width="800" height="600" aria-label="Pouring into a mug: simulation on the left, real robot on the right"></canvas><span class="chip sim">Simulation</span><span class="chip">Real robot</span><i class="bar" role="slider" tabindex="0" aria-label="Simulation / real robot split" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></i><figcaption><b>Pouring into a mug</b><span>1.5× speed</span></figcaption></figure>
+    </div>
+    <h3 class="rr"><b>Unitree G1 humanoid with Inspire hands</b><span>Whole-body replays of two placement tasks.</span></h3>
+    <div class="realgrid g1">
+      <figure><video muted loop playsinline preload="none" tabindex="-1" data-poster="assets/roll/real/g1_box.jpg" src="assets/roll/real/g1_box.mp4"></video><figcaption><b>Box placement</b><span>1.5× speed</span></figcaption></figure>
+      <figure><video muted loop playsinline preload="none" tabindex="-1" data-poster="assets/roll/real/g1_bag.jpg" src="assets/roll/real/g1_bag.mp4"></video><figcaption><b>Bag placement</b><span>1.5× speed</span></figcaption></figure>
     </div>
   </div>
 </section>

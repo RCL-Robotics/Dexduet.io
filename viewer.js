@@ -6,6 +6,8 @@ const TASKS = [
   { id: 'a008-pour', name: 'Reorient a bottle' },
   { id: 'a001-pad', name: 'Place a gamepad on a block' },
 ];
+// The scene of the third arm task is built only for the sim / real clip (tools/viewer/capture_real.mjs) and is not deployed.
+if (new URLSearchParams(location.search).has('o001')) TASKS.push({ id: 'o001-pour', name: 'Pour into a mug' });
 const VIEWS = [
   { id: 'robot', name: 'DexDuet' },
   { id: 'human', name: 'Human' },
