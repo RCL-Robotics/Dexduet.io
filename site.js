@@ -405,3 +405,11 @@
     })(0);
   }
 })();
+
+// copy button on the BibTeX block
+document.querySelectorAll('.bib .copy').forEach((b) => b.addEventListener('click', async () => {
+  const text = b.parentElement.querySelector('code').textContent;
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(b.parentElement.querySelector('code')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); sel.removeAllRanges(); }
+  b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy'; }, 1600);
+}));

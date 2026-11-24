@@ -1141,3 +1141,13 @@ nav a.link[aria-current] { color: var(--ink); background: var(--wash); }
 @media (max-width: 640px) { .realgrid.arms { grid-template-columns: 1fr; } }
 @media (max-width: 720px) { #real .rr { margin-top: 26px; font-size: 16px; } .realgrid.g1 { grid-template-columns: 1fr 1fr; gap: 12px; } }
 @media (max-width: 960px) { .realgrid.arms figcaption { font-size: 12.5px; flex-direction: column; align-items: start; gap: 2px; } }
+
+/* BibTeX block and text footer */
+#bibtex { padding-top: 0; }
+.bib { position: relative; max-width: 840px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+.bib pre { margin: 0; padding: 22px 26px; overflow-x: auto; font: 13.5px/1.65 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--ink); text-align: left; }
+.bib .copy { position: absolute; top: 12px; right: 12px; padding: 5px 12px; font: 600 12.5px var(--sans); color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+.bib .copy:hover { color: var(--ink); border-color: var(--muted); }
+footer .wrap { gap: 6px 10px; }
+footer a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 640px) { .bib pre { padding: 46px 16px 18px; font-size: 12px; } }
