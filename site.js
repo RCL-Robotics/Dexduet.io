@@ -313,7 +313,7 @@
   /* ---- Results: matched pairs and hold rate (Table 2) ---- */
   $('#pairs').innerHTML = [['Inspire', 28, 28, '+22.4'], ['Allegro', 41, 42, '+20.0'], ['XHand', 19, 20, '+12.4'], ['Schunk', 29, 32, '+16.8']]
     .map(([n, a, b, gain]) => `<div class="hand"><b>${n}</b><div class="dots">${Array.from({ length: b }, (_, i) => `<i class="${i < a ? '' : 'no'}" style="--i:${i}"></i>`).join('')}</div><span><b>${a}</b> vs ${b - a}<small>${gain} Contact-AUC</small></span></div>`).join('')
-    + '<p class="sum"><b>117 vs 5</b><span>Of 122 pairs, DexDuet has the higher Contact-AUC in 117 and DexMachina in 5; the mean gain is <b>17.9 points</b>.</span></p>';
+    + '<p class="sum"><b>117 vs 5</b><span>Of 122 pairs, DexDuet has the higher Contact-AUC in 117 and DexMachina in 5; the median gain is <b>17.9 points</b>.</span></p>';
   $('#hold').innerHTML = [['Inspire', 17.0, 37.1], ['Allegro', 14.1, 22.9], ['XHand', 5.7, 25.7], ['Schunk', 25.5, 42.9], ['All', 15.6, 32.1]]
     .map(([n, b, d]) => `<div class="hbar"><b>${n}</b><div style="width:${b * 1.6}%" data-v="${b.toFixed(1)}"></div><span></span><div class="d" style="width:${d * 1.6}%" data-v="${d.toFixed(1)}"></div></div>`).join('');
 
