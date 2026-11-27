@@ -127,9 +127,8 @@
 
   /* ---- SPIDER suite: panels are reference, baseline, DexDuet ---- */
   {
-    const SUITES = [['#sp', 'spider', 'SPIDER', [['box-30-230', 'Box'], ['ketchup-30-230', 'Ketchup, clip 1'], ['ketchup-30-230-u02', 'Ketchup, clip 2'], ['laptop-30-230', 'Laptop'],
-      ['mixer-30-230', 'Mixer'], ['notebook-30-230', 'Notebook'], ['waffleiron-30-230', 'Waffle iron']]]];
-    // The ManipTrans suite is not shown as clips: DexDuet's replay shakes on eight of its ten clips (tools/viewer/shake.py).
+    const SUITES = [['#sp', 'spider', 'SPIDER', [['box-30-230', 'Box'], ['ketchup-30-230', 'Ketchup, clip 1'], ['ketchup-30-230-u02', 'Ketchup, clip 2'],
+      ['mixer-30-230', 'Mixer'], ['notebook-30-230', 'Notebook'], ['waffleiron-30-230', 'Waffle iron'], ['laptop-30-230', 'Laptop']]]];
     SUITES.forEach(([box, key, name, clips]) => {
       const grid = $(`${box} .pargrid`);
       clips.forEach(([id, title]) => side(grid, title, 3, 1, [name, 'DexDuet'])(`${R}suites/${key}_${id}.mp4`, `${R}suites/${key}_${id}.jpg`));
@@ -215,8 +214,8 @@
 
   /* ---- humanoid study: human recording, CHORD (PPO) and DexDuet on the eight highlight episodes, one at a time ---- */
   {
-    const EPS = [[24, 'Watering can, pour'], [27, 'Woven basket, ground to desk'], [9, 'Red bowl, under the chair'], [11, 'Book, pick and place'],
-      [17, 'Traffic cone, ground to table'], [18, 'Trash can, drag sideways'], [23, 'Toy stroller, back and forth'], [12, 'Platform, turn']];
+    const EPS = [[27, 'Woven basket, ground to desk'], [9, 'Red bowl, under the chair'], [11, 'Book, pick and place'], [17, 'Traffic cone, ground to table'],
+      [18, 'Trash can, drag sideways'], [23, 'Toy stroller, back and forth'], [12, 'Platform, turn'], [24, 'Watering can, pour']];
     const load = side($('#g1 .pargrid'), '', 3, 0, ['Human', 'CHORD (PPO)', 'DexDuet'], 0.6);
     mk($('#g1 .tabs'), EPS.map((e) => e[1]), (k) => {
       const id = 'ep' + String(EPS[k][0]).padStart(2, '0');
